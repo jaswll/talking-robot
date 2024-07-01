@@ -1,0 +1,4 @@
+mutagen
+openai
+gTTS
+dotenv

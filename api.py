@@ -1,6 +1,7 @@
 from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-client = OpenAI(
-  organization='YOUR_ORG_ID',
-  project='$PROJECT_ID',
-)
+load_dotenv()
+
+
