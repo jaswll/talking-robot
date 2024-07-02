@@ -1,0 +1,37 @@
+!pip install speechrecognition
+#!pip install PyAudio #Deprecated?
+!pip3 install pvrecorder
+
+import speech_recognition as sr
+
+from pvrecorder import PvRecorder as PvRecorder
+
+#for index, device in enumerate(PvRecorder.get_audio_devices()): print(f"[{index}] {device}")
+
+recorder = PvRecorder(device_index=-1, frame_length=512)
+
+try:
+    recorder.start()
+
+    while True:
+        frame = recorder.read()
+        # Do something ...
+except KeyboardInterrupt:
+    recorder.stop()
+finally:
+    recorder.delete()
+
+
+r = sr.Recognizer()
+r.recognize_google()
+
+try:
+# for testing purposes, we're just using the default API key
+# to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
+# instead of `r.recognize_google(audio)`
+  print("Google Speech Recognition thinks you said " + r.recognize_google(audio))
+except sr.UnknownValueError: 
+  print("Google Speech Recognition could not understand audio") 
+except sr.RequestError as e: 
+  print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
